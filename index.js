@@ -37,9 +37,10 @@ serialport.on('open', function(){
 io.on('connection', function(socket){
     console.log('socket.io connection');
     serialport.on('data', function(data){
-        console.log(data);
+        // console.log(data);
         data = data.toString();
         data = data.replace(/(\r\n|\n|\r)/gm,'');
+        console.log(data);
 
         //Slicing the component identifier (i.e. A0, A1, BP)
         var dataKey = data.slice(0,2);
