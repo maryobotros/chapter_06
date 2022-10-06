@@ -40,7 +40,7 @@ io.on('connection', function(socket){
         // console.log(data);
         data = data.toString();
         data = data.replace(/(\r\n|\n|\r)/gm,'');
-        console.log(data);
+        
 
         //Slicing the component identifier (i.e. A0, A1, BP)
         var dataKey = data.slice(0,2);
@@ -48,6 +48,7 @@ io.on('connection', function(socket){
         var dataString = data.slice(2);
         // Replacing new line at the end of each string with an empty string 
         dataString = dataString.replace(/(\r\n|\n|\r)/gm,'');
+        console.log(data);
         
         // If the button s interacted with 
         if(dataKey === "BP"){
@@ -59,7 +60,7 @@ io.on('connection', function(socket){
             socket.emit("button-data", dataArray);
         } 
         // Else if one of the potentiometers is interacted with 
-        else {
+        else if(dataKey == "A0" || dataKey == "A1"){
             // Make an object to store the dataKey and dataString
             var dataObject = {
                 dataKey: dataKey,
